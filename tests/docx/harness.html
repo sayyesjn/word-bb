@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8"><title>SJN docx harness</title>
+<link rel="stylesheet" href="../../app/css/app.css">
+<script src="../../app/js/zip.js"></script>
+<script src="../../app/js/docx-export.js"></script>
+<script src="../../app/js/docx-import.js"></script>
+</head><body>
+<script>
+/* Rich sample in the exact HTML shape the editor produces. */
+window.makeImage = function(type, w, h){
+  var c = document.createElement('canvas'); c.width = w || 160; c.height = h || 100;
+  var g = c.getContext('2d'); g.fillStyle = '#3b82f6'; g.fillRect(0, 0, c.width, c.height);
+  g.fillStyle = '#facc15'; g.fillRect(10, 10, 60, 40); g.fillStyle = '#fff'; g.font = '20px sans-serif'; g.fillText('SJN', 80, 70);
+  return c.toDataURL(type || 'image/png');
+};
+window.sampleHtml = function(){
+  return [
+    '<h1>บันทึกข้อความ SJN Word</h1>',
+    '<h2>หัวข้อรอง Heading 2</h2><h3 style="text-align:center">หัวข้อย่อย</h3>',
+    '<p>ข้อความธรรมดา <b>ตัวหนา</b> <i>ตัวเอียง</i> <u>ขีดเส้นใต้</u> <s>ขีดฆ่า</s> H<sub>2</sub>O x<sup>2</sup>​ และ <span style="font-family:Prompt,\'Sarabun\',sans-serif;font-size:20pt;color:#e00000">ฟอนต์ Prompt สีแดง 20pt</span></p>',
+    '<p><span style="font-family:&quot;Times New Roman&quot;,serif;font-size:12pt">Times New Roman 12pt</span> <span style="background-color:#ffff00">ไฮไลต์เหลือง</span> <span style="font-family:Kanit,\'Sarabun\',sans-serif;font-weight:bold;font-style:italic">Kanit หนาเอียง</span> <a href="https://example.com/a?b=1&amp;c=2">ลิงก์ตัวอย่าง</a></p>',
+    '<p style="text-align:center">จัดกึ่งกลาง center</p>',
+    '<p style="text-align:justify;margin-left:1cm;margin-right:1cm;text-indent:1.27cm">จัดชิดสองข้าง เยื้องบรรทัดแรก ' + 'ภาษาไทยยาวมากเพื่อทดสอบการตัดบรรทัด '.repeat(6) + '</p>',
+    '<p style="text-align:right;margin-top:12pt;margin-bottom:12pt;line-height:1.5">ชิดขวา ระยะห่างก่อน-หลัง 12pt บรรทัด 1.5</p>',
+    '<p style="margin-left:2.54cm;text-indent:-1.27cm">แขวน (hanging) ' + 'ข้อความต่อเนื่อง '.repeat(10) + '</p>',
+    '<p dir="rtl">مرحبا بالعالم</p>',
+    '<p>ขึ้นบรรทัดใหม่<br>บรรทัดที่สอง<br>บรรทัดที่สาม</p>',
+    '<ul><li>รายการหนึ่ง</li><li>รายการสอง<ul><li>ซ้อน 2.1</li><li>ซ้อน 2.2<ul><li>ซ้อน 3</li></ul></li></ul></li><li>รายการสาม</li></ul>',
+    '<ol><li>ลำดับหนึ่ง</li><li>ลำดับสอง<ol><li>ย่อย a</li><li>ย่อย b</li></ol></li><li>ลำดับสาม</li></ol>',
+    '<ol><li>เริ่มใหม่ 1</li><li>เริ่มใหม่ 2</li></ol>',
+    '<ul><li>ซ้อนผ่าน ul &gt; ul</li><ul><li>ลูกโดยตรง</li></ul></ul>',
+    '<table><tbody><tr><th colspan="2">หัวตาราง colspan</th><th>คอลัมน์ 3</th></tr>' +
+      '<tr><td>เซลล์ A</td><td><b>เซลล์ B</b></td><td style="text-align:right">1,234.50</td></tr>' +
+      '<tr><td>แถวสาม</td><td colspan="2" style="padding-left:1.27cm">เซลล์ผสาน 2 คอลัมน์ เยื้อง</td></tr></tbody></table>',
+    '<p>ภาพ: <img src="' + makeImage('image/png') + '" width="160" height="100" alt="ภาพทดสอบ"></p>',
+    '<p><img src="' + makeImage('image/webp', 200, 120) + '" style="width:100px"></p>',
+    '<hr>',
+    '<p>ก่อนตัดหน้า</p>',
+    '<div class="pbreak" contenteditable="false"></div><p>หน้าที่สอง ข้อความหลังตัดหน้า</p>',
+    '<div class="pbreak" contenteditable="false"></div><p><br></p>',
+    '<p>หน้าที่สาม สุดท้าย</p>'
+  ].join('');
+};
+window.samplePage = function(land){
+  var w = land ? 1123 : 794, h = land ? 794 : 1123;
+  return { size:'A4', land: !!land, mt:96, mb:96, ml:96, mr:96, w:w, h:h };
+};
+window.sampleHF = { header:'หัวกระดาษ SJN', footer:'ท้ายกระดาษ ภาษาไทย', pos:'bc', fmt:'หน้า {n} / {N}' };
+window.bytesOf = function(blob){ return blob.arrayBuffer().then(function(b){ return Array.from(new Uint8Array(b)); }); };
+window.toB64 = function(arr){ var s = ''; for(var i = 0; i < arr.length; i += 8192) s += String.fromCharCode.apply(null, arr.slice(i, i + 8192)); return btoa(s); };
+window.fromB64 = function(b){ var s = atob(b), u = new Uint8Array(s.length); for(var i = 0; i < s.length; i++) u[i] = s.charCodeAt(i); return u.buffer; };
+</script>
+</body></html>

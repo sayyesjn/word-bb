@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2b579a">
+<meta name="color-scheme" content="light dark">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>SJN Word</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,400;0,700;1,400;1,700&family=Prompt:ital,wght@0,400;0,700;1,400;1,700&family=Kanit:ital,wght@0,400;0,700;1,400;1,700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mitr:wght@400;700&family=Niramit:wght@400;700&family=K2D:wght@400;700&family=Krub:wght@400;700&family=KoHo:wght@400;700&family=Kodchasan:wght@400;700&family=Bai+Jamjuree:wght@400;700&family=Chakra+Petch:wght@400;700&family=Athiti:wght@400;700&family=Mali:wght@400;700&family=Pridi:wght@400;700&family=Taviraj:wght@400;700&family=Trirong:wght@400;700&family=Maitree:wght@400;700&family=Noto+Sans+Thai:wght@400;700&family=Noto+Serif+Thai:wght@400;700&family=Anuphan:wght@400;700&family=IBM+Plex+Sans+Thai:wght@400;700&family=Charmonman:wght@400;700&family=Srisakdi:wght@400;700&family=Fahkwang:wght@400;700&family=Thasadith:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Itim&family=Chonburi&family=Pattaya&family=Sriracha&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;700&family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Poppins:wght@400;700&family=Merriweather:wght@400;700&family=Playfair+Display:wght@400;700&family=Lora:wght@400;700&family=Source+Serif+4:wght@400;700&family=Inconsolata:wght@400;700&family=Caveat:wght@400;700&family=Dancing+Script:wght@400;700&display=swap">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div class="app" id="app">
+  <header class="titlebar">
+    <button class="ttlbtn" id="ttlBtn" aria-label="Rename document"><span id="ttlText">เอกสารไม่มีชื่อ</span> - <span id="saveState">Saved</span></button>
+    <input class="ttlin" id="ttlIn" type="text" maxlength="120" aria-label="Document name" hidden>
+    <div class="acct"><span>SJN</span><span class="avatar" aria-hidden="true">SJ</span></div>
+  </header>
+
+  <nav class="tabs" id="tabs" aria-label="Ribbon tabs">
+    <div class="tabscroll" role="tablist">
+      <button class="tab" role="tab" data-tab="file" aria-selected="false">File</button>
+      <button class="tab" role="tab" data-tab="home" aria-selected="true">Home</button>
+      <button class="tab" role="tab" data-tab="insert" aria-selected="false">Insert</button>
+      <button class="tab" role="tab" data-tab="draw" aria-selected="false">Draw</button>
+      <button class="tab" role="tab" data-tab="layout" aria-selected="false">Layout</button>
+      <button class="tab" role="tab" data-tab="review" aria-selected="false">Review</button>
+      <button class="tab" role="tab" data-tab="view" aria-selected="false">View</button>
+    </div>
+    <div class="tics">
+      <button class="ti" id="btnAI" data-act="ai" aria-label="AI Assistant" aria-pressed="false" data-ico="sparkle"></button>
+      <button class="ti" id="btnTell" data-menu="tell" aria-label="Tell me what you want to do" aria-haspopup="true" aria-expanded="false" data-ico="bulb"></button>
+      <button class="ti" id="btnRead" data-act="v-read" aria-label="Read mode" data-ico="book"></button>
+      <button class="ti" id="btnShare" data-menu="share" aria-label="Share" aria-haspopup="true" aria-expanded="false" data-ico="share"></button>
+      <button class="ti" id="btnUndo" data-act="undo" aria-label="Undo" data-ico="undo" disabled></button>
+      <button class="ti" id="btnRedo" data-act="redo" aria-label="Redo" data-ico="redo" disabled></button>
+    </div>
+  </nav>
+
+  <section class="ribbon" id="ribbonWrap">
+    <div class="rib" id="ribbon" role="toolbar" aria-label="Ribbon">
+      <div class="panel on" data-panel="home">
+        <button class="box" id="fontBox" data-menu="font" aria-haspopup="true" aria-expanded="false" aria-label="Font"><span id="fontLbl">TH Sarabun New</span><svg class="car" viewBox="0 0 24 24"><path d="M6 9h12l-6 7z"/></svg></button>
+        <div class="box szbox"><input id="size" inputmode="decimal" aria-label="Font size" value="16"><button data-menu="sizes" aria-haspopup="true" aria-expanded="false" aria-label="Font sizes"><svg class="car" viewBox="0 0 24 24" style="width:20px;height:20px;fill:currentColor;stroke:none;opacity:.7"><path d="M6 9h12l-6 7z"/></svg></button></div>
+        <button class="rb" data-cmd="bold" aria-pressed="false" aria-label="Bold"><b>B</b></button>
+        <button class="rb" data-cmd="italic" aria-pressed="false" aria-label="Italic"><i class="t">I</i></button>
+        <button class="rb" data-cmd="underline" aria-pressed="false" aria-label="Underline"><u>U</u></button>
+        <button class="rb" data-cmd="strikeThrough" aria-pressed="false" aria-label="Strikethrough"><s>ab</s></button>
+        <button class="rb" id="btnHilite" data-menu="hilite" aria-haspopup="true" aria-expanded="false" aria-label="Highlight color"><span data-ico="highlighter"></span><i class="bar" id="hlBar"></i></button>
+        <button class="rb" id="btnColor" data-menu="color" aria-haspopup="true" aria-expanded="false" aria-label="Font color"><span class="glA">A</span><i class="bar" id="colBar" style="--c:#e00000"></i></button>
+        <button class="rb" data-act="clear" aria-label="Clear all formatting"><span data-ico="clearfmt"></span></button>
+        <span class="vsep" style="margin-inline:2px;background:transparent"></span>
+        <button class="rb" data-menu="more" aria-haspopup="true" aria-expanded="false" aria-label="More formatting"><span class="x2">X<sub>2</sub></span><span class="lb">More Formatting</span></button>
+        <span class="vsep"></span>
+        <button class="rb" data-cmd="insertUnorderedList" aria-pressed="false" aria-label="Bullets"><span data-ico="bullets"></span></button>
+        <button class="rb" data-cmd="insertOrderedList" aria-pressed="false" aria-label="Numbering"><span data-ico="numbering"></span></button>
+        <button class="rb" data-act="ltr" aria-pressed="true" aria-label="Left-to-right"><span data-ico="ltr"></span></button>
+        <button class="rb" data-act="rtl" aria-pressed="false" aria-label="Right-to-left"><span data-ico="rtl"></span></button>
+        <button class="rb" data-menu="align" aria-haspopup="true" aria-expanded="false" aria-label="Alignment"><span data-ico="align"></span></button>
+        <button class="rb" data-menu="spacing" aria-haspopup="true" aria-expanded="false" aria-label="Line spacing"><span data-ico="linesp"></span></button>
+        <button class="rb has-car" id="btnPara" data-menu="para" aria-haspopup="true" aria-expanded="false" aria-label="Paragraph"><span data-ico="para"></span><svg class="car" viewBox="0 0 24 24"><path d="M6 9h12l-6 7z"/></svg></button>
+        <span class="vsep"></span>
+        <button class="rb" data-menu="styles" aria-haspopup="true" aria-expanded="false" aria-label="Styles"><span data-ico="styles"></span></button>
+        <button class="rb" data-act="find" aria-label="Find"><span data-ico="find"></span></button>
+        <span class="vsep"></span>
+        <button class="rb" data-act="ai" aria-pressed="false" aria-label="AI Assistant"><span data-ico="sparkle"></span></button>
+      </div>
+
+      <div class="panel" data-panel="insert">
+        <button class="rb lab" data-menu="table" aria-haspopup="true" aria-expanded="false"><span data-ico="table"></span><span class="lb">Table</span></button>
+        <button class="rb lab" data-act="picture"><span data-ico="picture"></span><span class="lb">Pictures</span></button>
+        <button class="rb lab" data-menu="link" aria-haspopup="true" aria-expanded="false"><span data-ico="link"></span><span class="lb">Link</span></button>
+        <span class="vsep"></span>
+        <button class="rb lab" data-menu="hf" aria-haspopup="true" aria-expanded="false"><span data-ico="hf"></span><span class="lb">Header &amp; Footer</span></button>
+        <button class="rb lab" data-menu="pnum" aria-haspopup="true" aria-expanded="false"><span data-ico="pnum"></span><span class="lb">Page Number</span></button>
+        <button class="rb lab" data-act="pbreak"><span data-ico="pbreak"></span><span class="lb">Page Break</span></button>
+        <span class="vsep"></span>
+        <button class="rb lab" data-menu="symbol" aria-haspopup="true" aria-expanded="false"><span data-ico="symbol"></span><span class="lb">Symbol</span></button>
+        <button class="rb lab" data-menu="date" aria-haspopup="true" aria-expanded="false"><span data-ico="date"></span><span class="lb">Date &amp; Time</span></button>
+        <button class="rb lab" data-cmd="insertHorizontalRule"><span data-ico="hr"></span><span class="lb">Line</span></button>
+      </div>
+
+      <div class="panel" data-panel="draw">
+        <button class="rb lab" data-act="touch" aria-pressed="false"><span data-ico="touch"></span><span class="lb">Draw with Touch</span></button>
+        <span class="vsep"></span>
+        <button class="rb lab" data-act="tool-pen" aria-pressed="false"><span data-ico="pen"></span><span class="lb">Pen</span></button>
+        <button class="rb lab" data-act="tool-hl" aria-pressed="false"><span data-ico="highlighter"></span><span class="lb">Highlighter</span></button>
+        <button class="rb lab" data-act="tool-eraser" aria-pressed="false"><span data-ico="eraser"></span><span class="lb">Eraser</span></button>
+        <span class="vsep"></span>
+        <button class="rb lab" id="btnInkColor" data-menu="inkcolor" aria-haspopup="true" aria-expanded="false"><span class="dot" id="inkDot"></span><span class="lb">Color</span></button>
+        <button class="rb lab" data-menu="inkwidth" aria-haspopup="true" aria-expanded="false"><span data-ico="thick"></span><span class="lb">Thickness</span></button>
+        <span class="vsep"></span>
+        <button class="rb lab" data-act="ink-undo"><span data-ico="undo"></span><span class="lb">Undo Ink</span></button>
+        <button class="rb lab" data-act="ink-clear"><span data-ico="trash"></span><span class="lb">Clear Ink</span></button>
+      </div>
+
+      <div class="panel" data-panel="layout">
+        <button class="rb lab" data-menu="margins" aria-haspopup="true" aria-expanded="false"><span data-ico="margins"></span><span class="lb">Margins</span></button>
+        <button class="rb lab" data-menu="orient" aria-haspopup="true" aria-expanded="false"><span data-ico="orient"></span><span class="lb">Orientation</span></button>
+        <button class="rb lab" data-menu="psize" aria-haspopup="true" aria-expanded="false"><span data-ico="psize"></span><span class="lb">Size</span></button>
+        <span class="vsep"></span>
+        <button class="rb lab" data-act="pbreak"><span data-ico="pbreak"></span><span class="lb">Breaks</span></button>
+        <button class="rb lab" data-menu="hf" aria-haspopup="true" aria-expanded="false"><span data-ico="hf"></span><span class="lb">Header &amp; Footer</span></button>
+        <button class="rb lab" data-menu="pnum" aria-haspopup="true" aria-expanded="false"><span data-ico="pnum"></span><span class="lb">Page Number</span></button>
+      </div>
+
+      <div class="panel" data-panel="review">
+        <button class="rb lab" data-act="wc"><span data-ico="wordcount"></span><span class="lb">Word Count</span></button>
+        <button class="rb lab" data-act="spell" aria-pressed="false"><span data-ico="spell"></span><span class="lb">Spelling</span></button>
+        <button class="rb lab" data-act="speak" aria-pressed="false"><span data-ico="speaker"></span><span class="lb">Read Aloud</span></button>
+        <span class="vsep"></span>
+        <button class="rb lab" data-act="find"><span data-ico="find"></span><span class="lb">Find</span></button>
+        <span class="vsep"></span>
+        <button class="rb lab" data-act="ai" aria-pressed="false"><span data-ico="sparkle"></span><span class="lb">AI Assistant</span></button>
+      </div>
+
+      <div class="panel" data-panel="view">
+        <button class="rb lab" data-act="v-print" aria-pressed="true"><span data-ico="printlayout"></span><span class="lb">Print Layout</span></button>
+        <button class="rb lab" data-act="v-mobile" aria-pressed="false"><span data-ico="mobile"></span><span class="lb">Mobile View</span></button>
+        <button class="rb lab" data-act="v-read"><span data-ico="book"></span><span class="lb">Read Mode</span></button>
+        <span class="vsep"></span>
+        <button class="rb lab" data-menu="zoom" aria-haspopup="true" aria-expanded="false"><span data-ico="zoom"></span><span class="lb" id="zoomLbl">Zoom</span></button>
+        <button class="rb lab" data-act="fit"><span data-ico="fitwidth"></span><span class="lb">Page Width</span></button>
+      </div>
+    </div>
+    <button class="collapse" id="btnCollapse" aria-label="Collapse ribbon" data-ico="chevup"></button>
+  </section>
+
+  <div class="findbar" id="findbar" hidden>
+    <div class="frow">
+      <input id="findIn" type="text" placeholder="Find in document" aria-label="Find">
+      <span class="cnt" id="findCnt">0/0</span>
+      <button class="fbtn" data-f="prev" aria-label="Previous match" data-ico="up"></button>
+      <button class="fbtn" data-f="next" aria-label="Next match" data-ico="down"></button>
+      <button class="fbtn" data-f="rtoggle" aria-label="Show replace" data-ico="replace"></button>
+      <button class="fbtn" data-f="close" aria-label="Close find" data-ico="close"></button>
+    </div>
+    <div class="frow" id="replRow" hidden>
+      <input id="replIn" type="text" placeholder="Replace with" aria-label="Replace with">
+      <button class="ftxt" data-f="rep">Replace</button>
+      <button class="ftxt" data-f="repall">Replace All</button>
+    </div>
+  </div>
+
+  <main class="desk" id="desk">
+    <div class="scaler" id="scaler">
+      <div class="sheet print" id="sheet">
+        <div class="pages" id="pages"></div>
+        <div class="doc" id="doc" contenteditable="true" spellcheck="false" lang="th" role="textbox" aria-multiline="true" aria-label="Document"></div>
+        <div class="deco" id="deco" aria-hidden="true"></div>
+        <svg class="ink" id="ink" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+      </div>
+    </div>
+  </main>
+</div>
+
+<button class="editpill" id="editPill">Edit</button>
+<div class="pill" id="pill">Page 1 of 1</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="menu" id="menu" hidden></div>
+<div class="bs" id="bs" hidden>
+  <div class="bsback" data-bs="close"></div>
+  <aside class="bspanel" aria-label="File">
+    <div class="bshead"><button data-bs="close" aria-label="Close" data-ico="back"></button><span>File</span></div>
+    <div id="bslist"></div>
+  </aside>
+</div>
+<aside class="ai" id="ai" hidden aria-label="AI assistant">
+  <div class="aihead">
+    <span class="aiic" data-ico="sparkle"></span><span class="aiti">Claude &amp; AI</span>
+    <button class="aix" id="aiClose" type="button" aria-label="Close" data-ico="close"></button>
+  </div>
+  <div class="aibody" id="aiBody">
+    <section class="aiconn" id="aiConn">
+      <div class="aistat2"><span class="aidot off" id="aiDot"></span><span id="aiStatus">Not connected</span></div>
+      <p class="ainote">Type your orders in a Claude chat and Claude reads and edits the document that is open here. Keep this app open while Claude works (split-screen with Claude is handy).</p>
+      <details class="aiother" id="aiSetup" open>
+        <summary>Connect Claude</summary>
+        <ol class="aisteps">
+          <li>Put the <b>relay</b> online (the <code>server/</code> folder, see README) and type its address below.</li>
+          <li>Tap <b>Connect</b>.</li>
+          <li>In Claude: <b>Settings → Connectors → Add custom connector</b>. Paste the <b>connector address</b>. Choose <b>no sign-in</b>.</li>
+          <li>In a Claude chat say, for example: <i>“Open my Word document and fix the spelling.”</i></li>
+        </ol>
+        <label class="ailab" for="aiRelay">Relay address</label>
+        <input id="aiRelay" class="aiinp" type="url" inputmode="url" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="https://your-relay.up.railway.app">
+        <label class="ailab" for="aiKey">Room key (secret)</label>
+        <div class="airow nowrap"><input id="aiKey" class="aiinp" type="text" readonly aria-label="Room key"><button class="mbtn alt" id="aiKeyNew" type="button">New key</button></div>
+        <label class="ailab" for="aiUrl">Connector address (paste this into Claude)</label>
+        <div class="airow nowrap"><input id="aiUrl" class="aiinp" type="text" readonly><button class="mbtn alt" id="aiCopyUrl" type="button" disabled>Copy</button></div>
+        <div class="airow"><button class="mbtn" id="aiConnect" type="button">Connect</button><button class="mbtn alt" id="aiDisconnect" type="button" hidden>Disconnect</button></div>
+        <p class="ainote warn">Anyone who has the connector address can read and edit the open document. Keep it private. “New key” cuts off the old address.</p>
+      </details>
+    </section>
+    <details class="aiother" id="aiOther">
+      <summary>Use ChatGPT, Gemini or another AI (copy and paste)</summary>
+      <textarea id="aiIn" rows="3" placeholder="Tell the AI what to do, e.g. fix the spelling of the whole document" aria-label="Tell the AI what to do"></textarea>
+      <div class="aichips" id="aiChips"></div>
+      <div class="aiopts">
+        <div class="seg" id="aiScope" role="group" aria-label="Scope">
+          <button type="button" data-v="sel" aria-pressed="true">Selection</button>
+          <button type="button" data-v="doc" aria-pressed="false">Whole document</button>
+        </div>
+      </div>
+      <div class="aihint" id="aiHint"></div>
+      <ol class="aisteps">
+        <li>Tap <b>Copy prompt</b> and paste it into the other AI app.</li>
+        <li>Copy that AI's reply, paste it below, then tap <b>Apply reply</b>.</li>
+      </ol>
+      <div class="airow"><button class="mbtn alt" id="aiCopy" type="button">Copy prompt</button></div>
+      <textarea id="aiPaste" rows="4" placeholder="Paste the AI's reply here" aria-label="Paste the AI's reply"></textarea>
+      <div class="airow">
+        <button class="mbtn alt" id="aiPasteBtn" type="button">Paste</button>
+        <button class="mbtn" id="aiApply" type="button">Apply reply</button>
+      </div>
+    </details>
+    <div class="ailog" id="aiLog" aria-live="polite"></div>
+  </div>
+</aside>
+<div class="modal" id="modal" hidden><div class="mcard" id="mcard"></div></div>
+<input type="file" id="imgInput" accept="image/*" hidden>
+<input type="file" id="openInput" accept=".docx,.html,.htm,.txt,.md,.json,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,text/html,text/markdown,application/json" hidden>
+
+<div id="printRoot" class="doc" aria-hidden="true"></div>
+<style id="printStyle"></style>
+
+<script src="js/store.js"></script>
+<script src="js/zip.js"></script>
+<script src="js/docx-export.js"></script>
+<script src="js/docx-import.js"></script>
+<script src="js/bridge.js"></script>
+<script src="js/app.js"></script>
+<script>
+if('serviceWorker' in navigator && location.protocol !== 'file:'){
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('sw.js').then(function(reg){
+      function offer(w){
+        var m = document.getElementById('updBar');
+        if(m) return;
+        m = document.createElement('div'); m.id = 'updBar'; m.className = 'updbar'; m.setAttribute('role', 'status');
+        m.innerHTML = '<span>A new version is ready.</span><button type="button">Update</button><button type="button" class="x" aria-label="Later">×</button>';
+        m.querySelector('button').onclick = function(){ w.postMessage('SKIP_WAITING'); };
+        m.querySelector('.x').onclick = function(){ m.remove(); };
+        document.body.appendChild(m);
+      }
+      if(reg.waiting && navigator.serviceWorker.controller) offer(reg.waiting);
+      reg.addEventListener('updatefound', function(){
+        var w = reg.installing;
+        if(w) w.addEventListener('statechange', function(){ if(w.state === 'installed' && navigator.serviceWorker.controller) offer(w); });
+      });
+      setInterval(function(){ reg.update().catch(function(){}); }, 3600000);
+    }).catch(function(){});
+    var reloading = false, had = !!navigator.serviceWorker.controller;
+    navigator.serviceWorker.addEventListener('controllerchange', function(){ if(!had){ had = true; return; } if(reloading) return; reloading = true; location.reload(); });
+  });
+}
+</script>
+</body>
+</html>
