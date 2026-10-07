@@ -660,6 +660,7 @@ function layoutAll(){
   $('#zoomLbl').textContent = Math.round(zoom * 100) + '%';
 }
 function fitZoom(){
+  if(desk.clientWidth < 200) return 1;
   var w = desk.clientWidth - 32;
   return Math.max(0.4, Math.min(1.25, w / page.w));
 }
@@ -1864,6 +1865,17 @@ window.addEventListener('resize', function(){
   if(view === 'mobile'){ applyPage(); paginate(); }
   else if(!manualZoom){ zoom = fitZoom(); layoutAll(); }
 });
+/* the desk can get its real width late (page opened in a background tab, split-screen, rotation): refit when it changes */
+function refitDesk(){
+  if(desk.clientWidth < 200) return;
+  if(view === 'mobile'){ applyPage(); paginate(); return; }
+  if(manualZoom) return;
+  var z = fitZoom();
+  if(Math.abs(z - zoom) > 0.004){ zoom = z; layoutAll(); refreshSoon(); }
+}
+if(window.ResizeObserver) new ResizeObserver(refitDesk).observe(desk);
+document.addEventListener('visibilitychange', function(){ if(document.visibilityState === 'visible') setTimeout(refitDesk, 50); });
+window.addEventListener('pageshow', function(){ setTimeout(refitDesk, 50); });
 document.addEventListener('keydown', function(e){
   if(e.key === 'Escape'){
     if(!menu.hidden) closeMenu();
