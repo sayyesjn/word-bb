@@ -2603,7 +2603,7 @@ function aiConnUI(){
   $('#aiConnect').hidden = on; $('#aiDisconnect').hidden = !on;
   $('#aiConnect').textContent = s.status === 'superseded' ? 'Take over' : 'Connect';
   $$('[data-act="ai"]').forEach(function(b){ b.classList.toggle('live', s.status === 'online'); });
-  var rel = $('#aiRelay').value.trim();
+  var rel = SJNBridge.clean($('#aiRelay').value);
   $('#aiUrl').value = SJNBridge.validServer(rel) && bridgeCfg.key ? SJNBridge.connectorUrl(rel, bridgeCfg.key) : '';
   $('#aiCopyUrl').disabled = !$('#aiUrl').value;
   $('#aiKey').value = bridgeCfg.key;

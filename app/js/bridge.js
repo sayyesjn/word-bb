@@ -12,7 +12,11 @@ function emit(status, detail){
   listeners.slice().forEach(function(f){ try{ f(status, st.detail); }catch(e){} });
 }
 function onStatus(f){ listeners.push(f); }
-function clean(url){ return String(url || '').trim().replace(/\/+$/, ''); }
+function clean(url){
+  var u = String(url || '').trim().replace(/\/+$/, '');
+  if(u && !/^[a-z][a-z0-9+.-]*:\/\//i.test(u) && /^[^\s/]+\.[^\s/]+/.test(u)) u = (/^(localhost|127\.|192\.168\.|10\.)/i.test(u) ? 'http://' : 'https://') + u;
+  return u;
+}
 function randomKey(){
   var a = new Uint8Array(24);
   global.crypto.getRandomValues(a);
