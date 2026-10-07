@@ -17,10 +17,10 @@ tests/    ชุดทดสอบ (app/ = เบราว์เซอร์จ�
 
 ## 1) โฮสต์ตัวแอป (GitHub Pages, ฟรี)
 
-1. อัปโหลดโค้ดนี้ขึ้น GitHub repo ชื่อ `sjn-word` (branch `main`)
+1. อัปโหลดโค้ดนี้ขึ้น GitHub repo ชื่อ `word-bb` (branch `main`)
 2. repo → **Settings → Pages → Build and deployment → Source: GitHub Actions**
 3. ไปที่แท็บ **Actions** รอ workflow *Deploy app to GitHub Pages* เป็นสีเขียว (ถ้าไม่รันเอง กด *Run workflow*)
-4. เปิด `https://<ชื่อผู้ใช้>.github.io/sjn-word/`
+4. เปิด `https://<ชื่อผู้ใช้>.github.io/word-bb/`
 
 ทุกครั้งที่แก้ไฟล์ใน `app/` แล้ว push ระบบจะ deploy ใหม่ และแอปที่ติดตั้งไว้จะขึ้นแถบ **“A new version is ready · Update”**
 
@@ -43,7 +43,7 @@ Claude --(MCP / HTTPS)--> relay --(SSE)--> SJN Word ที่เปิดอย�
 
 ### 3.1 ติดตั้ง relay บน Railway (หรือ Render / Fly.io)
 
-1. https://railway.com → **New Project → Deploy from GitHub repo** → เลือก `sjn-word`
+1. https://railway.com → **New Project → Deploy from GitHub repo** → เลือก `word-bb`
 2. เข้าไปที่ service → **Settings → Root Directory** ใส่ `server`
 3. **Settings → Networking → Generate Domain** จะได้ที่อยู่ เช่น `https://sjn-word-relay.up.railway.app`
 4. (แนะนำ) **Variables** → เพิ่ม `ALLOW_ORIGIN` = `https://<ชื่อผู้ใช้>.github.io`
