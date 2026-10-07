@@ -3,7 +3,7 @@ const { chromium } = require('/opt/npm-tools/node_modules/playwright');
 const http = require('http'), fs = require('fs'), path = require('path'), { spawn, execFileSync } = require('child_process');
 const ROOT = path.resolve(__dirname, '../..'), APP = path.join(ROOT, 'app'), OUT = process.argv[2] || '/tmp/sjn-app-out';
 fs.mkdirSync(OUT, { recursive: true });
-const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.webmanifest': 'application/manifest+json' };
+const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.webmanifest': 'application/manifest+json', '.woff': 'font/woff' };
 let fails = 0, n = 0;
 const ok = (cond, msg, extra) => { n++; if (!cond) { fails++; console.log('  FAIL:', msg, extra !== undefined ? JSON.stringify(extra).slice(0, 400) : ''); } else console.log('  ok:', msg); };
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

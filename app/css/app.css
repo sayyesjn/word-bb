@@ -1,3 +1,12 @@
+/* TH Sarabun New (Thai national font, free to use and distribute) bundled so the page looks the same on every device. 'TH SarabunPSK' is the same design. */
+@font-face{font-family:"TH Sarabun New";font-style:normal;font-weight:400;font-display:swap;src:url(../fonts/THSarabunNew.woff) format("woff")}
+@font-face{font-family:"TH Sarabun New";font-style:normal;font-weight:700;font-display:swap;src:url(../fonts/THSarabunNew-Bold.woff) format("woff")}
+@font-face{font-family:"TH Sarabun New";font-style:italic;font-weight:400;font-display:swap;src:url(../fonts/THSarabunNew-Italic.woff) format("woff")}
+@font-face{font-family:"TH Sarabun New";font-style:italic;font-weight:700;font-display:swap;src:url(../fonts/THSarabunNew-BoldItalic.woff) format("woff")}
+@font-face{font-family:"TH SarabunPSK";font-style:normal;font-weight:400;font-display:swap;src:url(../fonts/THSarabunNew.woff) format("woff")}
+@font-face{font-family:"TH SarabunPSK";font-style:normal;font-weight:700;font-display:swap;src:url(../fonts/THSarabunNew-Bold.woff) format("woff")}
+@font-face{font-family:"TH SarabunPSK";font-style:italic;font-weight:400;font-display:swap;src:url(../fonts/THSarabunNew-Italic.woff) format("woff")}
+@font-face{font-family:"TH SarabunPSK";font-style:italic;font-weight:700;font-display:swap;src:url(../fonts/THSarabunNew-BoldItalic.woff) format("woff")}
 /* Layout: Word for Android tablet. Blue title bar, blue tab row whose selected tab joins the light ribbon,
    grey desk with white A4 pages separated by a gap, small page pill instead of a status bar. */
 :root{

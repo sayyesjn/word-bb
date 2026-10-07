@@ -5,6 +5,7 @@ const SHELL = 'sjn-shell-' + BUILD;
 const FONTS = 'sjn-fonts-v1';
 const ASSETS = [
   './', 'index.html', 'manifest.webmanifest', 'css/app.css',
+  'fonts/THSarabunNew.woff', 'fonts/THSarabunNew-Bold.woff', 'fonts/THSarabunNew-Italic.woff', 'fonts/THSarabunNew-BoldItalic.woff',
   'js/store.js', 'js/zip.js', 'js/docx-export.js', 'js/docx-import.js', 'js/bridge.js', 'js/app.js',
   'icons/icon-192.png', 'icons/icon-512.png', 'icons/maskable-512.png', 'icons/apple-touch-icon.png', 'icons/favicon-32.png'
 ];
